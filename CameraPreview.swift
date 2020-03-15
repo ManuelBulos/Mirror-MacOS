@@ -55,12 +55,9 @@ class CameraPreview: NSView {
     }()
 
     private lazy var cameraInput: AVCaptureDeviceInput? = {
-        let session = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera],
-                                                       mediaType: .video,
-                                                       position: .unspecified)
-        guard let device = session.devices.first else { return nil }
+        let iPhone = AVCaptureDevice.devices()[1]
         do {
-            return try AVCaptureDeviceInput(device: device)
+            return try AVCaptureDeviceInput(device: iPhone)
         } catch {
             self.delegate?.didEncounterError(error)
             return nil
